@@ -10,7 +10,7 @@ def notfound_view(request):
     return dict()
 
 
-@forbidden_view_config()
+@forbidden_view_config(renderer='../templates/403.mako')
 def forbidden_view(request):
     if request.authenticated_userid is None:
         response = HTTPUnauthorized()

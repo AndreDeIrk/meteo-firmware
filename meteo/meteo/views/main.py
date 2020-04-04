@@ -10,8 +10,8 @@ from ..models import User
 from ..security import Permission
 
 
-@view_config(route_name='login',
-             renderer='../templates/mytemplate.mako',
+@view_config(route_name='home',
+             renderer='../templates/home.mako',
              permission="hop",
              )
 def login_view(request):
