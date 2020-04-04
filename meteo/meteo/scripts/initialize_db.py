@@ -12,9 +12,12 @@ def setup_models(dbsession):
     Add or update models / fixtures in the database.
 
     """
-    model = models.mymodel.User(login="administrator")
-    model.set_password("admin")
-    dbsession.add(model)
+    user = models.mymodel.User(login="administrator")
+    user.set_password("admin")
+    dbsession.add(user)
+
+    station = models.mymodel.Station(serial_num="000.000.000")
+    dbsession.add(station)
 
 
 def parse_args(argv):

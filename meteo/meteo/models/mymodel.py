@@ -25,3 +25,11 @@ class User(Base):
     def check_password(self, password):
         return self.password == hashlib.sha512((add_safety + password).encode("utf-8")).hexdigest()
 
+
+class Station(Base):
+    __tablename__ = 'station'
+
+    id = Column(Integer, primary_key=True)
+    serial_num = Column(Text, default="", nullable=False)
+    time_zone = Column(Integer, default=None, nullable=True)
+

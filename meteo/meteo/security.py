@@ -21,11 +21,14 @@ logger = logging.getLogger(__name__)
 class Permission(enum.Enum):
     # Имеет доступ к просмотру своей страницы
     USER = "PERMISSION_USER"
+    # Имеет доступ к редактирование своей страницы
+    USER_EDIT = "PERMISSION_USER_EDIT"
 
 
 class RootFactory:
     __acl__ = [
         (Allow, Authenticated, Permission.USER),
+        (Allow, Authenticated, Permission.USER_EDIT),
         (Deny, Everyone, ALL_PERMISSIONS),
     ]
 

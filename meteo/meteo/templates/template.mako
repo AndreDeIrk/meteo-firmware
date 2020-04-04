@@ -37,7 +37,80 @@
     <%block name="head"/>
 </head>
 <body>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+        <a class="navbar-brand" href="${request.route_url("home")}">
+            METEO-WEB
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <%
+                    table = request.current_route_path().split("/")[1]
+                %>
+                <li class="nav-item">
+                    <a class="nav-link ${"active" if table=="settings" else ""}" href="${request.route_url("settings")}"> <i class="fas fa-user-cog fa-1x"></i> </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ${"active" if table=="time" else ""}" href="${request.route_url("time")}"> <i class="far fa-clock"></i> </a>
+                </li>
+    ##             <li class="nav-item">
+    ##                 <a class="nav-link ${"active" if table=="devices" else ""}" href="${request.route_url("admin_devices", _query = {"page": "1"})}"> Устройства </a>
+    ##             </li>
+            </ul>
+
+            <ul class="navbar-nav">
+                <li class="nav-item" style="color:white">
+                    <div id="current_date_time"></div>
+                    <div>${"SN: " + station.serial_num}</div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
 ${next.body()}
 </body>
+<script type="text/javascript">
+    /* функция добавления ведущих нулей */
+    /* (если число меньше десяти, перед числом добавляем ноль) */
+    function zero_first_format(value)
+    {
+        if (value < 10)
+        {
+            value='0'+value;
+        }
+        return value;
+    }
+
+    /* функция получения текущей даты и времени */
+    function date_time()
+    {
+        var current_datetime = new Date();
+        var day = zero_first_format(current_datetime.getDate());
+        var month = zero_first_format(current_datetime.getMonth()+1);
+        var year = current_datetime.getFullYear();
+        var hours = zero_first_format(current_datetime.getHours());
+        var minutes = zero_first_format(current_datetime.getMinutes());
+        var seconds = zero_first_format(current_datetime.getSeconds());
+        var zone = -current_datetime.getTimezoneOffset()/60;
+
+        return day+"."+month+"."+year+" "+hours+":"+minutes+":"+seconds+" UTC+"+zone;
+    }
+
+    function update()
+    {
+        document.getElementById('current_date_time').innerHTML = date_time();
+    }
+
+    /* выводим текущую дату и время на сайт в блок с id "current_date_time_block" */
+    document.getElementById('current_date_time').innerHTML = date_time();
+
+    /* каждую секунду получаем текущую дату и время */
+    /* и вставляем значение в блок с id "current_date_time" */
+    setInterval(update, 1000);
+</script>
 </html>
 
