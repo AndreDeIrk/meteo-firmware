@@ -57,6 +57,9 @@
                 <li class="nav-item">
                     <a class="nav-link ${"active" if table=="time" else ""}" href="${request.route_url("time")}"> <i class="far fa-clock"></i> </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="${request.route_url("logout")}"> Выход </i> </a>
+                </li>
     ##             <li class="nav-item">
     ##                 <a class="nav-link ${"active" if table=="devices" else ""}" href="${request.route_url("admin_devices", _query = {"page": "1"})}"> Устройства </a>
     ##             </li>

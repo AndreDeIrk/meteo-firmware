@@ -4,5 +4,5 @@
 <%block name="title">METEO-WEB</%block>
 
 <main class="container">
-
+authenticated: ${request.authenticated_userid}
 </main>

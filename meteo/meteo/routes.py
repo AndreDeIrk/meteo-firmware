@@ -4,3 +4,5 @@ def includeme(config):
     config.add_route('home', '/')
     config.add_route('settings', '/settings')
     config.add_route('time', '/time')
+
+    config.add_route('logout', '/logout')

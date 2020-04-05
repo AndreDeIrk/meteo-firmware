@@ -37,15 +37,18 @@
 
             <div class="col-md-2">
                 <label for="mode">Режим:</label>
-                <select class="form-control select-chosen mr-sm-2" id="mode" name="mode" required>
+                <select class="form-control mr-sm-2" id="mode" name="mode" required>
                     <option value="0" ${"selected" if 1 == 1 else ""}>Автоматический</option>
                     <option value="1" ${"selected" if 1 == 1 else ""}>Вручную</option>
                 </select>
             </div>
 
             <div class="form-group col-md-8">
-                <label for="password">Текущий пароль:</label>
-                <input type="password" name="password" id="password" class="form-control" placeholder="Введите текущий пароль">
+                <%
+                    from datetime import datetime
+                    %>
+                <label for="date">Текущая дата:</label>
+                <input type="date" name="date" id="date" class="form-control" value="2020-01-21">
             </div>
         </div>
 

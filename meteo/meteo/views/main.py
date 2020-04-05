@@ -24,6 +24,10 @@ class Views:
         except (NoResultFound, MultipleResultsFound):
             raise HTTPNotFound()
 
+    @view_config(route_name="logout", request_method="GET", permission=Permission.USER)
+    def view_logout(self):
+        return HTTPFound(self.request.route_url("home"), headers=forget(self.request))
+
     @view_config(route_name='home',
                  renderer='../templates/home.mako',
                  permission=Permission.USER,
