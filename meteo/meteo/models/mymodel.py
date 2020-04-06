@@ -31,5 +31,5 @@ class Station(Base):
 
     id = Column(Integer, primary_key=True)
     serial_num = Column(Text, default="", nullable=False)
-    time_zone = Column(Integer, default=None, nullable=True)
+    time_zone = Column(Text, default="", nullable=False)
 

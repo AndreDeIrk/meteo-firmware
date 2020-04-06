@@ -23,19 +23,18 @@
             <div class="col-md-2">
                 <label for="timezone">Часовой пояс:</label>
                 <select class="form-control select-chosen mr-sm-2" id="timezone" name="timezone" required>
-                %for zone in range(-12, 13):
-                    <%
-                        if zone < 0:
-                            timezone = "UTC"+str(zone)
-                        else:
-                            timezone = "UTC+"+str(zone)
-                        %>
-                    <option value="${zone}" ${"selected" if station.time_zone == zone else ""}>${timezone}</option>
+                <%
+                    import subprocess
+                    result = subprocess.run(["timedatectl", "list-timezones"], stdout=subprocess.PIPE, encoding='utf-8')
+                    zones = result.stdout.split('\n')[:-1]
+                    %>
+                %for zone in zones:
+                    <option value="${zone}" ${"selected" if station.time_zone == zone else ""}>${zone}</option>
                 %endfor
                 </select>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <label for="mode">Режим:</label>
                 <select class="form-control mr-sm-2" id="mode" name="mode" required>
                     <option value="0" ${"selected" if 1 == 1 else ""}>Автоматический</option>
@@ -43,12 +42,13 @@
                 </select>
             </div>
 
-            <div class="form-group col-md-8">
-                <%
-                    from datetime import datetime
-                    %>
+            <div class="form-group col-md-3">
                 <label for="date">Текущая дата:</label>
                 <input type="date" name="date" id="date" class="form-control" value="2020-01-21">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="date">Текущее время:</label>
+                <input type="time" name="time" id="time" class="form-control" value="">
             </div>
         </div>
 
